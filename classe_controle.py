@@ -1,10 +1,12 @@
-def abrir_csv(arquivo):
-	with open(arquivo, 'rt', encoding='latin-1') as f:
-		results = []
-		for linha in f:
-			palavras = linha.split(';')
-			results.append((palavras[0], palavras[1:]))
+class Controle:
+	def __init__(self, arquivo=None):
+		self.arquivo = arquivo
 
-	return results
+	def abrir_csv(self):
+		with open(self.arquivo, 'rt', encoding='latin-1') as f:
+			results = []
+			for linha in f:
+				palavras = linha.split(';')
+				results.append(palavras)
 
-print(abrir_csv('./consulta_cand_2014/consulta_cand_2014_AC.csv'))
+		return results

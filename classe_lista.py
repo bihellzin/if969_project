@@ -2,9 +2,8 @@ from classe_candidato import *
 
 
 class No:
-    def __init__(self, candidato=None, bens=None, prox=None, ante=None):
+    def __init__(self, candidato=None, prox=None, ante=None):
         self.candidato = candidato
-        self.bens = bens
         self.prox = prox
         self.ante = ante
 
