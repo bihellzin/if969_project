@@ -1,6 +1,10 @@
+from classe_candidato import *
+
+
 class No:
-    def __init__(self, data=None, prox=None, ante=None):
-        self.data = data
+    def __init__(self, candidato=None, bens=None, prox=None, ante=None):
+        self.candidato = candidato
+        self.bens = bens
         self.prox = prox
         self.ante = ante
 
@@ -16,28 +20,6 @@ class Lista:
                 node = No(i)
                 self.anexar(node)
             self.size = len(objeto_iteravel)
-
-    def listaVazia(self):
-        if self.size:
-            return False
-        return True
-
-    def anexar(self, novoNo):
-        if self.listaVazia():
-            self.root = novoNo
-            self.root.prox = None
-
-        else:
-            if type(novoNo) is str or type(novoNo) is int or type(novoNo) is dict or type(novoNo) is list or type(
-                    novoNo) is tuple:
-                novoNo = No(novoNo)
-            ultimoNo = self.root
-            while ultimoNo.prox is not None:
-                ultimoNo = ultimoNo.prox
-            ultimoNo.prox = novoNo
-            novoNo.ante = ultimoNo
-            novoNo.prox = None
-        self.size += 1
 
     def __str__(self):
         if self.size > 0:
@@ -98,6 +80,44 @@ class Lista:
 
         except IndexError:
             print('ERRO !\nVocê inseriu um índice maior que a quantidade de itens da lista')
+
+    def __iter__(self):
+        class Ponteiro:
+            def __init__(self, lista, passo=0):
+                self.passo = passo
+                self.lista = lista
+
+            def __next__(self):
+                if self.passo >= self.lista.size:
+                    raise StopIteration
+                value = self.lista[self.passo]
+                self.passo += 1
+
+                return value
+
+        return Ponteiro(self)
+
+    def listaVazia(self):
+        if self.size:
+            return False
+        return True
+
+    def anexar(self, novoNo):
+        if self.listaVazia():
+            self.root = novoNo
+            self.root.prox = None
+
+        else:
+            if type(novoNo) is str or type(novoNo) is int or type(novoNo) is dict or type(novoNo) is list or type(
+                    novoNo) is tuple:
+                novoNo = No(novoNo)
+            ultimoNo = self.root
+            while ultimoNo.prox is not None:
+                ultimoNo = ultimoNo.prox
+            ultimoNo.prox = novoNo
+            novoNo.ante = ultimoNo
+            novoNo.prox = None
+        self.size += 1
 
     def indice(self, value):
         try:
@@ -179,18 +199,9 @@ class Lista:
             ultimoLista = ultimoLista.prox
         self.anexar(lista.selecionar(0))
 
-    def __iter__(self):
-        class Ponteiro:
-            def __init__(self, lista, passo=0):
-                self.passo = passo
-                self.lista = lista
+    def compara_candidatos(self, candidato_1, candidato_2):
+        pass
 
-            def __next__(self):
-                if self.passo >= self.lista.size:
-                    raise StopIteration
-                value = self.lista[self.passo]
-                self.passo += 1
 
-                return value
-
-        return Ponteiro(self)
+if __name__ == '__main__':
+    a = Candidato()
