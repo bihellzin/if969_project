@@ -1,6 +1,3 @@
-from classe_candidato import *
-
-
 class No:
     def __init__(self, candidato=None, prox=None, ante=None):
         self.candidato = candidato
@@ -27,10 +24,10 @@ class Lista:
             ultimoNo = self.root
             while True:
                 if ultimoNo.prox is None:
-                    nos += str(ultimoNo.data)
+                    nos += str(ultimoNo.candidato)
                     break
                 else:
-                    nos += str(ultimoNo.data) + ', '
+                    nos += str(ultimoNo.candidato) + ', '
                 ultimoNo = ultimoNo.prox
 
             return nos
@@ -46,9 +43,9 @@ class Lista:
         ultimo = self.root
         while True:
             if ultimo.prox is None:
-                retorno += str(ultimo.data) + '])'
+                retorno += str(ultimo.candidato) + '])'
                 return retorno
-            retorno += str(ultimo.data) + ', '
+            retorno += str(ultimo.candidato) + ', '
             ultimo = ultimo.prox
 
     def __getitem__(self, indice):
@@ -61,7 +58,7 @@ class Lista:
                 while inicio < indice:
                     procurado = procurado.prox
                     inicio += 1
-                return procurado.data
+                return procurado.candidato
         except IndexError:
             print('ERRO !\nVocê inseriu um índice maior que a quantidade de itens da lista')
 
@@ -75,7 +72,7 @@ class Lista:
                 while inicio < indice:
                     procurado = procurado.prox
                     inicio += 1
-                procurado.data = value
+                procurado.candidato = value
 
         except IndexError:
             print('ERRO !\nVocê inseriu um índice maior que a quantidade de itens da lista')
@@ -124,7 +121,7 @@ class Lista:
             inicio = 0
             procurado = self.root
             while inicio < self.size:
-                if value == procurado.data:
+                if value == procurado.candidato:
                     return inicio
                 procurado = procurado.prox
                 inicio += 1
@@ -139,7 +136,7 @@ class Lista:
             print('Índice maior que a quantidade de índices da lista')
         else:
             if indice == 0:
-                item = self.root.data
+                item = self.root.candidato
                 self.root = self.root.prox
                 self.root.ante = None
             else:
@@ -150,7 +147,7 @@ class Lista:
                     achado = proximo
                     proximo = achado.prox
                     inicio += 1
-                item = achado.data
+                item = achado.candidato
                 achado.ante.prox = proximo
                 proximo.ante = achado.ante
             self.size -= 1
@@ -200,7 +197,3 @@ class Lista:
 
     def compara_candidatos(self, candidato_1, candidato_2):
         pass
-
-
-if __name__ == '__main__':
-    a = Candidato()
