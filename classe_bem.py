@@ -39,14 +39,20 @@ class Bem:
         self._valor_bem = valor
 
     def __str__(self):
-        pass
+        saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
+                                                          self.descricao_detalhada_bem)
+
+        return saida
 
     def __repr__(self):
-        pass
+        saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
+                                                          self.descricao_detalhada_bem)
+
+        return saida
 
     def __eq__(self, outro_bem):
-        if self._codigo_bem == outro_bem._codigo_bem:
-            if outro_bem._descricao_detalhata_bem == self._descricao_detalhada_bem:
+        if self.codigo_bem == outro_bem.codigo_bem:
+            if outro_bem.descricao_detalhata_bem == self.descricao_detalhada_bem:
                 return True
 
             else:

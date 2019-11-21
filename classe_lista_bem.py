@@ -1,22 +1,23 @@
-from classe_controle import *
+#from classe_controle import *
 
 
-class NoCandidato:
-    def __init__(self, candidato=None, prox=None, ante=None):
-        self.candidato = candidato
+class NoBem:
+    def __init__(self, bem=None, prox=None, ante=None):
+        self.bem = bem
         self.prox = prox
         self.ante = ante
 
 
-class ListaCandidato:
+class ListaBem:
 
     def __init__(self, objeto_iteravel=None):
         self.root = None
         self.size = 0
+        self.total = 0
         if objeto_iteravel is not None:
             self.objeto_iteravel = objeto_iteravel
             for i in objeto_iteravel:
-                node = NoCandidato(i)
+                node = NoBem(i)
                 self.anexar(node)
             self.size = len(objeto_iteravel)
 
@@ -27,10 +28,10 @@ class ListaCandidato:
             ultimoNo = self.root
             while True:
                 if ultimoNo.prox is None:
-                    nos += str(ultimoNo.candidato)
+                    nos += str(ultimoNo.bem)
                     break
                 else:
-                    nos += str(ultimoNo.candidato) + ', '
+                    nos += str(ultimoNo.bem) + ', '
                 ultimoNo = ultimoNo.prox
 
             return nos
@@ -46,9 +47,9 @@ class ListaCandidato:
         ultimo = self.root
         while True:
             if ultimo.prox is None:
-                retorno += str(ultimo.candidato) + '])'
+                retorno += str(ultimo.bem) + '])'
                 return retorno
-            retorno += str(ultimo.candidato) + ', '
+            retorno += str(ultimo.bem) + ', '
             ultimo = ultimo.prox
 
     def __getitem__(self, indice):
@@ -61,7 +62,7 @@ class ListaCandidato:
                 while inicio < indice:
                     procurado = procurado.prox
                     inicio += 1
-                return procurado.candidato
+                return procurado.bem
         except IndexError:
             print('ERRO !\nVocê inseriu um índice maior que a quantidade de itens da lista')
 
@@ -75,7 +76,7 @@ class ListaCandidato:
                 while inicio < indice:
                     procurado = procurado.prox
                     inicio += 1
-                procurado.candidato = value
+                procurado.bem = value
 
         except IndexError:
             print('ERRO !\nVocê inseriu um índice maior que a quantidade de itens da lista')
@@ -109,7 +110,7 @@ class ListaCandidato:
         else:
             if type(novoNo) is str or type(novoNo) is int or type(novoNo) is dict or type(novoNo) is list or type(
                     novoNo) is tuple:
-                novoNo = NoCandidato(novoNo)
+                novoNo = NoBem(novoNo)
             ultimoNo = self.root
             while ultimoNo.prox is not None:
                 ultimoNo = ultimoNo.prox
@@ -124,7 +125,7 @@ class ListaCandidato:
             inicio = 0
             procurado = self.root
             while inicio < self.size:
-                if value == procurado.candidato:
+                if value == procurado.bem:
                     return inicio
                 procurado = procurado.prox
                 inicio += 1
@@ -139,7 +140,7 @@ class ListaCandidato:
             print('Índice maior que a quantidade de índices da lista')
         else:
             if indice == 0:
-                item = self.root.candidato
+                item = self.root.bem
                 self.root = self.root.prox
                 self.root.ante = None
             else:
@@ -150,7 +151,7 @@ class ListaCandidato:
                     achado = proximo
                     proximo = achado.prox
                     inicio += 1
-                item = achado.candidato
+                item = achado.bem
                 achado.ante.prox = proximo
                 proximo.ante = achado.ante
             self.size -= 1
@@ -174,7 +175,7 @@ class ListaCandidato:
             return
 
         if self.listaVazia():
-            valor = NoCandidato(valor)
+            valor = NoBem(valor)
             self.root = valor
             self.root.prox = None
 
@@ -182,7 +183,7 @@ class ListaCandidato:
             inicio = 0
             if type(valor) is str or type(valor) is int or type(valor) is dict or type(valor) is list or type(
                     valor) is tuple:
-                valor = NoCandidato(valor)
+                valor = NoBem(valor)
 
             if indice == 0:
                 temp = self.root
@@ -204,17 +205,17 @@ class ListaCandidato:
         self.size += 1
 
     def inserirOrdenado(self, novoNo):
-        if self.listaVazia() and isinstance(novoNo, NoCandidato):
+        if self.listaVazia() and isinstance(novoNo, NoBem):
             self.root = novoNo
 
         else:
             no = self.root
-            if isinstance(novoNo, NoCandidato):
-                if novoNo.candidato.id_candidato > no.candidato.id_candidato:
-                    while novoNo.candidato.id_candidato > no.candidato.id_candidato and no.prox is not None:
+            if isinstance(novoNo, NoBem):
+                if novoNo.bem.valor_bem > no.bem.valor_bem:
+                    while novoNo.bem.valor_bem > no.bem.valor_bem and no.prox is not None:
                         no = no.prox
 
-                    if novoNo.candidato.id_candidato < no.candidato.id_candidato:
+                    if novoNo.bem.valor_bem < no.bem.valor_bem:
                         no = no.ante
 
                     if no.prox is None:
@@ -230,7 +231,7 @@ class ListaCandidato:
 
 
                 else:
-                    while novoNo.candidato.id_candidato < no.candidato.id_candidato and no.ante is not None:
+                    while novoNo.bem.valor_bem < no.bem.valor_bem and no.ante is not None:
                         no = no.ante
 
                     if no is self.root:
@@ -254,106 +255,3 @@ class ListaCandidato:
             self.anexar(lista.selecionar(0))
             ultimoLista = ultimoLista.prox
         self.anexar(lista.selecionar(0))
-
-    def compara_candidatos(self, candidato_1, candidato_2):
-        pass
-
-
-def candidatosOrdemAlfabeticaCrescente(lista):
-    array = []
-    for i in lista:
-        array.append(i)
-    n = len(array)
-    gap = n // 2
-    while gap > 0:
-
-        for i in range(gap, n):
-            temp = array[i]
-            j = i
-
-            while j >= gap and array[j - gap].nome < temp.nome:
-                array[j] = array[j - gap]
-                j -= gap
-            array[j] = temp
-        gap //= 2
-
-    novaLista = ListaCandidato()
-    for i in array:
-        novaLista.inserirComeco(NoCandidato(i))
-
-    return novaLista
-
-
-def candidatosOrdemAlfabeticaDecrescente(lista):
-    array = []
-    for i in lista:
-        array.append(i)
-    n = len(array)
-    gap = n // 2
-    while gap > 0:
-
-        for i in range(gap, n):
-            temp = array[i]
-            j = i
-
-            while j >= gap and array[j - gap].nome > temp.nome:
-                array[j] = array[j - gap]
-                j -= gap
-            array[j] = temp
-        gap //= 2
-
-    novaLista = ListaCandidato()
-    for i in array:
-        novaLista.inserirComeco(NoCandidato(i))
-
-    return novaLista
-
-
-def candidatosTotalBensCrescente(lista):
-    array = []
-    for i in lista:
-        array.append(i)
-    n = len(array)
-    gap = n // 2
-    while gap > 0:
-
-        for i in range(gap, n):
-            temp = array[i]
-            j = i
-
-            while j >= gap and array[j - gap] > temp.nome:
-                array[j] = array[j - gap]
-                j -= gap
-            array[j] = temp
-        gap //= 2
-
-    novaLista = ListaCandidato()
-    for i in array:
-        novaLista.inserirComeco(NoCandidato(i))
-
-    return novaLista
-
-
-def candidatosTotalBensDecrescente(lista):
-    array = []
-    for i in lista:
-        array.append(i)
-    n = len(array)
-    gap = n // 2
-    while gap > 0:
-
-        for i in range(gap, n):
-            temp = array[i]
-            j = i
-
-            while j >= gap and array[j - gap].nome > temp.nome:
-                array[j] = array[j - gap]
-                j -= gap
-            array[j] = temp
-        gap //= 2
-
-    novaLista = ListaCandidato()
-    for i in array:
-        novaLista.inserirComeco(NoCandidato(i))
-
-    return novaLista

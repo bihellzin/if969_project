@@ -213,12 +213,17 @@ class Candidato:
 
     def __str__(self):
         saida = '{} -- {} -- {}\n{} ({}) {} ({})\nResumo dos bens:\n  - Total declarado: R${}\n  - Total por tipo de ' \
-                'bem '
+                'bem '.format(self.nome_urna, self.numero_urna, self.sigla_partido, self.descricao_cargo, self.sigla_uf,
+                              self.nome_municipio_nascimento, self.uf_nascimento, self.lista_bens)
 
         return saida
 
     def __repr__(self):
-        pass
+        saida = '{} -- {} -- {}\n{} ({}) {} ({})\nResumo dos bens:\n  - Total declarado: R${}\n  - Total por tipo de ' \
+                'bem '.format(self.nome_urna, self.numero_urna, self.sigla_partido, self.descricao_cargo, self.sigla_uf,
+                              self.nome_municipio_nascimento, self.uf_nascimento, self.lista_bens)
+
+        return saida
 
     def __eq__(self, outro_candidato):
         if self._nome == outro_candidato._nome:
