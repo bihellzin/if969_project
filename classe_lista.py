@@ -1,3 +1,6 @@
+from classe_candidato import Candidato
+
+
 class No:
     def __init__(self, candidato=None, prox=None, ante=None):
         self.candidato = candidato
@@ -153,6 +156,18 @@ class Lista:
             self.size -= 1
             return item
 
+    def inserirComeco(self, novoNo):
+        if self.listaVazia():
+            self.root = novoNo
+
+        else:
+            temp = self.root
+            self.root = novoNo
+            self.root.prox = temp
+            self.root.prox.ante = self.root
+
+        self.size += 1
+
     def inserir(self, indice, valor):
         if indice > self.size:
             print('índice não pode ser inserido na lista')
@@ -186,6 +201,51 @@ class Lista:
                 achado.ante.prox = valor
                 achado.ante = valor
                 valor.prox = achado
+        self.size += 1
+
+    def inserirOrdenado(self, novoNo):
+        if self.listaVazia() and isinstance(novoNo, No):
+            self.root = novoNo
+
+        else:
+            no = self.root
+            if isinstance(novoNo, No):
+                if novoNo.candidato.id_candidato > no.candidato.id_candidato:
+                    while novoNo.candidato.id_candidato > no.candidato.id_candidato and no.prox is not None:
+                        no = no.prox
+
+                    if novoNo.candidato.id_candidato < no.candidato.id_candidato:
+                        no = no.ante
+
+                    if no.prox is None:
+                        no.prox = novoNo
+                        novoNo.ante = no
+
+                    else:
+                        temp = no.prox
+                        no.prox.ante = novoNo
+                        novoNo.prox = temp
+                        novoNo.ante = no
+                        no.prox = novoNo
+
+
+                else:
+                    while novoNo.candidato.id_candidato < no.candidato.id_candidato and no.ante is not None:
+                        no = no.ante
+
+                    if no is self.root:
+                        self.inserirComeco(novoNo)
+
+                    else:
+                        temp = no.ante
+                        no.ante.prox = novoNo
+                        novoNo.ante = temp
+                        novoNo.prox = no
+                        no.ante = novoNo
+
+
+            else:
+                return False
         self.size += 1
 
     def concatenar(self, lista):

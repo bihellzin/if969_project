@@ -232,3 +232,9 @@ class Candidato:
 
     def listar_bens(self):
         pass
+
+    def __gt__(self, other):
+        return self.id_candidato > other.id_candidato
+
+    def __lt__(self, other):
+        return self.id_candidato < other.id_candidato
