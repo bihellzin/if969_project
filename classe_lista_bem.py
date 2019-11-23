@@ -1,4 +1,4 @@
-#from classe_controle import *
+# from classe_controle import *
 
 
 class NoBem:

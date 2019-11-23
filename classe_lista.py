@@ -321,7 +321,7 @@ def candidatosTotalBensCrescente(lista):
             temp = array[i]
             j = i
 
-            while j >= gap and array[j - gap] > temp.nome:
+            while j >= gap and array[j - gap].lista_bens.total < temp.lista_bens.total:
                 array[j] = array[j - gap]
                 j -= gap
             array[j] = temp
@@ -346,7 +346,113 @@ def candidatosTotalBensDecrescente(lista):
             temp = array[i]
             j = i
 
-            while j >= gap and array[j - gap].nome > temp.nome:
+            while j >= gap and array[j - gap].lista_bens.total > temp.lista_bens.total:
+                array[j] = array[j - gap]
+                j -= gap
+            array[j] = temp
+        gap //= 2
+
+    novaLista = ListaCandidato()
+    for i in array:
+        novaLista.inserirComeco(NoCandidato(i))
+
+    return novaLista
+
+
+def candidatosPartidoCrescente(lista):
+    array = []
+    for i in lista:
+        array.append(i)
+    n = len(array)
+    gap = n // 2
+    while gap > 0:
+
+        for i in range(gap, n):
+            temp = array[i]
+            j = i
+
+            while j >= gap and array[j - gap].nome_partido < temp.nome_partido:
+                array[j] = array[j - gap]
+                j -= gap
+            array[j] = temp
+        gap //= 2
+
+    novaLista = ListaCandidato()
+    for i in array:
+        novaLista.inserirComeco(NoCandidato(i))
+
+    return novaLista
+
+
+def candidatosPartidoDecrescente(lista):
+    array = []
+    for i in lista:
+        array.append(i)
+    n = len(array)
+    gap = n // 2
+    while gap > 0:
+
+        for i in range(gap, n):
+            temp = array[i]
+            j = i
+
+            while j >= gap and array[j - gap].nome_partido < temp.nome_partido:
+                array[j] = array[j - gap]
+                j -= gap
+            array[j] = temp
+        gap //= 2
+
+    novaLista = ListaCandidato()
+    for i in array:
+        novaLista.inserirComeco(NoCandidato(i))
+
+    return novaLista
+
+
+def candidatosNascimentoCrescente(lista):
+    array = []
+    for i in lista:
+        array.append(i)
+    n = len(array)
+    gap = n // 2
+    while gap > 0:
+
+        for i in range(gap, n):
+            temp = array[i]
+            j = i
+
+            while j >= gap and array[j - gap].data_nascimento[6:] + array[j - gap].data_nascimento[3:5] + \
+                    array[j - gap].data_nascimento[0:2] < temp.data_nascimento[6:] + temp.data_nascimento[3:5] + \
+                    temp.data_nascimento[0:2]:
+
+                array[j] = array[j - gap]
+                j -= gap
+            array[j] = temp
+        gap //= 2
+
+    novaLista = ListaCandidato()
+    for i in array:
+        novaLista.inserirComeco(NoCandidato(i))
+
+    return novaLista
+
+
+def candidatosNascimentoDecrescente(lista):
+    array = []
+    for i in lista:
+        array.append(i)
+    n = len(array)
+    gap = n // 2
+    while gap > 0:
+
+        for i in range(gap, n):
+            temp = array[i]
+            j = i
+
+            while j >= gap and array[j - gap].data_nascimento[6:] + array[j - gap].data_nascimento[3:5] + \
+                    array[j - gap].data_nascimento[0:2] > temp.data_nascimento[6:] + temp.data_nascimento[3:5] + \
+                    temp.data_nascimento[0:2]:
+
                 array[j] = array[j - gap]
                 j -= gap
             array[j] = temp

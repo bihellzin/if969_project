@@ -1,6 +1,7 @@
 from classe_lista import *
 from classe_candidato import *
 from classe_lista_bem import *
+from classe_bem import *
 
 
 class Controle:
@@ -24,7 +25,7 @@ class Controle:
                 palavras = linha.split(';')
                 results.append(palavras)
 
-        for i in range(1, len(results)):
+        for i in range(1, 5):
             candidato = Candidato()
             candidato.ano_eleicao = int(results[i][2][1:-1])
             candidato.sigla_uf = results[i][10][1:-1]
@@ -51,7 +52,27 @@ class Controle:
             candidato.lista_bens = ListaBem()
 
             lista_candidatos.inserirComeco(NoCandidato(candidato))
+
         return lista_candidatos
+
+    def abrir_csv_bens(self):
+        lista_bens = ListaBem()
+        with open(self.arquivo, 'rt', encoding='latin-1') as f:
+            results = []
+            for linha in f:
+                palavras = linha.split(';')
+                results.append(palavras)
+
+        for i in range(1, len(results)):
+            bem = Bem()
+            bem.codigo_bem = int(results[i][13][1:-1])
+            bem.descricao_tipo_bem = results[i][14][1:-1]
+            bem.descricao_detalhada_bem = results[i][15][1:-1]
+            bem.valor_bem = int(results[i][14][1:-1])
+
+            lista_bens.inserirComeco(NoBem(bem))
+
+        return lista_bens
 
 
 def shellSort(array):
@@ -69,6 +90,7 @@ def shellSort(array):
         gap //= 2
 
     return array
+
 
 def algumaCoisa(lista):
     arr = []

@@ -226,8 +226,8 @@ class Candidato:
         return saida
 
     def __eq__(self, outro_candidato):
-        if self._nome == outro_candidato._nome:
-            if self._cpf == outro_candidato._cpf:
+        if self.nome == outro_candidato.nome:
+            if self.cpf == outro_candidato.cpf:
                 return True
 
             else:
