@@ -1,6 +1,3 @@
-# from classe_controle import *
-
-
 class NoBem:
     def __init__(self, bem=None, prox=None, ante=None):
         self.bem = bem

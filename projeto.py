@@ -1,26 +1,45 @@
-# import time
-# from classe_candidato import *
-# from classe_bem import *
-from classe_lista import *
 from classe_controle import *
 
 if __name__ == '__main__':
     todosCandidatos = ListaCandidatosFinal()
 
-    print(candidatosNascimentoCrescente(todosCandidatos))
-    print('\n')
+    todosCandidatos.root.candidato.lista_bens.total = 1000
 
-    print(candidatosNascimentoDecrescente(todosCandidatos))
-    print('\n')
+    for i in candidatosNascimentoCrescente(todosCandidatos):
+        print(i.data_nascimento)
+        print('\n')
 
-    print(candidatosOrdemAlfabeticaCrescente(todosCandidatos))
-    print('\n')
+    print('\n###################################################################')
 
-    print(candidatosOrdemAlfabeticaDecrescente(todosCandidatos))
-    print('\n')
+    for i in candidatosNascimentoDecrescente(todosCandidatos):
+        print(i.data_nascimento)
+        print('\n')
 
-    print(candidatosPartidoCrescente(todosCandidatos))
-    print('\n')
+    print('\n###################################################################')
 
-    print(candidatosPartidoDecrescente(todosCandidatos))
-    print('\n')
+
+    for i in candidatosOrdemAlfabeticaCrescente(todosCandidatos):
+        print(i.nome)
+        print('\n')
+
+    print('\n###################################################################')
+
+    for i in candidatosOrdemAlfabeticaDecrescente(todosCandidatos):
+        print(i.nome)
+        print('\n')
+
+    print('\n###################################################################')
+
+    for i in candidatosPartidoCrescente(todosCandidatos):
+        print(i.nome_partido)
+        print('\n')
+
+    print('\n###################################################################')
+
+    for i in candidatosPartidoDecrescente(todosCandidatos):
+        print(i.nome_partido)
+        print('\n')
+
+    for i in candidatosTotalBensCrescente(todosCandidatos):
+        print(i.lista_bens.total)
+        print('\n')

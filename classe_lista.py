@@ -1,6 +1,3 @@
-from classe_controle import *
-
-
 class NoCandidato:
     def __init__(self, candidato=None, prox=None, ante=None):
         self.candidato = candidato
@@ -321,7 +318,7 @@ def candidatosTotalBensCrescente(lista):
             temp = array[i]
             j = i
 
-            while j >= gap and array[j - gap].lista_bens.total < temp.lista_bens.total:
+            while j >= gap and array[j - gap].lista_bens.total > temp.lista_bens.total:
                 array[j] = array[j - gap]
                 j -= gap
             array[j] = temp
@@ -346,7 +343,7 @@ def candidatosTotalBensDecrescente(lista):
             temp = array[i]
             j = i
 
-            while j >= gap and array[j - gap].lista_bens.total > temp.lista_bens.total:
+            while j >= gap and array[j - gap].lista_bens.total < temp.lista_bens.total:
                 array[j] = array[j - gap]
                 j -= gap
             array[j] = temp

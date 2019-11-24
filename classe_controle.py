@@ -25,7 +25,7 @@ class Controle:
                 palavras = linha.split(';')
                 results.append(palavras)
 
-        for i in range(1, 5):
+        for i in range(1, 11):
             candidato = Candidato()
             candidato.ano_eleicao = int(results[i][2][1:-1])
             candidato.sigla_uf = results[i][10][1:-1]
@@ -90,7 +90,6 @@ def shellSort(array):
         gap //= 2
 
     return array
-
 
 def algumaCoisa(lista):
     arr = []
