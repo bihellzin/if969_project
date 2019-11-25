@@ -252,9 +252,6 @@ class ListaCandidato:
             ultimoLista = ultimoLista.prox
         self.anexar(lista.selecionar(0))
 
-    def compara_candidatos(self, candidato_1, candidato_2):
-        pass
-
 
 def candidatosOrdemAlfabeticaCrescente(lista):
     array = []

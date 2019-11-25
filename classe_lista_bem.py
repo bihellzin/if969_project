@@ -165,6 +165,7 @@ class ListaBem:
             self.root.prox.ante = self.root
 
         self.size += 1
+        self.total += novoNo.bem.valor_bem
 
     def inserir(self, indice, valor):
         if indice > self.size:
@@ -247,8 +248,13 @@ class ListaBem:
         self.size += 1
 
     def concatenar(self, lista):
-        ultimoLista = lista.root
-        while ultimoLista.prox is not None:
-            self.anexar(lista.selecionar(0))
-            ultimoLista = ultimoLista.prox
-        self.anexar(lista.selecionar(0))
+        if self.listaVazia():
+            self.root = lista.root
+        else:
+            ultimoLista = lista.root
+            while ultimoLista.prox is not None:
+                ultimoLista = ultimoLista.prox
+            ultimoLista.prox = lista.root
+            lista.root.ante = ultimoLista
+
+        self.size += lista.size

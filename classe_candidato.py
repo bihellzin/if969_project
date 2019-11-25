@@ -1,3 +1,6 @@
+from classe_lista_bem import *
+
+
 class Candidato:
     def __init__(self):
         self._ano_eleicao = None
@@ -22,7 +25,7 @@ class Candidato:
         self._nome_municipio_nascimento = None
         self._situacao_candidato_pos_pleito = None
         self._situacao_candidatura = None
-        self._lista_bens = None
+        self._lista_bens = ListaBem()
 
     @property
     def ano_eleicao(self):
@@ -209,7 +212,7 @@ class Candidato:
         self._lista_bens = lista
 
     def incluirBem(self, objeto_bem):
-        pass
+        self.lista_bens.inserirComeco(NoBem(objeto_bem))
 
     def __str__(self):
         saida = '{} -- {} -- {}\n{} ({}) {} ({})\nResumo dos bens:\n  - Total declarado: R${}\n  - Total por tipo de ' \

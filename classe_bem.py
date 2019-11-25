@@ -5,6 +5,7 @@ class Bem:
         self._descricao_tipo_bem = None
         self._descricao_detalhada_bem = None
         self._valor_bem = None
+        self._id_candidato = None
 
     @property
     def codigo_bem(self):
@@ -37,6 +38,14 @@ class Bem:
     @valor_bem.setter
     def valor_bem(self, valor):
         self._valor_bem = valor
+
+    @property
+    def id_candidato(self):
+        return self._id_candidato
+
+    @id_candidato.setter
+    def id_candidato(self, value):
+        self._id_candidato = value
 
     def __str__(self):
         saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
