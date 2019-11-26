@@ -57,24 +57,26 @@ class Controle:
         return lista_candidatos
 
     def abrir_csv_bens(self, arquivo):
-        lista_bens = ListaBem()
+        colecaoBens = {}
         with open(arquivo, 'rt', encoding='latin-1') as f:
-            results = []
             for linha in f:
                 palavras = linha.split(';')
-                results.append(palavras)
+                if '"DT_GERACAO"' not in palavras:
+                    bem = Bem()
+                    bem.codigo_bem = int(palavras[13][1:-1])
+                    bem.descricao_tipo_bem = palavras[14][1:-1]
+                    bem.descricao_detalhada_bem = palavras[15][1:-1]
+                    bem.valor_bem = float(palavras[16][1:-4]) + float(palavras[16][-3:-1])/100
+                    bem.id_candidato = int(palavras[11][1:-1])
+                    if bem.id_candidato not in colecaoBens:
+                        colecaoBens[bem.id_candidato] = ListaBem()
+                        colecaoBens[bem.id_candidato].inserirComeco(NoBem(bem))
 
-        for i in range(1, len(results)):
-            bem = Bem()
-            bem.codigo_bem = int(results[i][13][1:-1])
-            bem.descricao_tipo_bem = results[i][14][1:-1]
-            bem.descricao_detalhada_bem = results[i][15][1:-1]
-            bem.valor_bem = float(results[i][16][1:-4]) # + float(results[i][16][-3:-1])/100
-            bem.id_candidato = int(results[i][11][1:-1])
+                    else:
+                        colecaoBens[bem.id_candidato].inserirComeco(NoBem(bem))
 
-            lista_bens.inserirComeco(NoBem(bem))
 
-        return lista_bens
+        return colecaoBens
 
 
     def retornaCandidatosDeterminadaCaracteristica(self, caracteristica):
@@ -285,26 +287,12 @@ def ListaCandidatosFinal():
 
 
 def ListaBensFinal():
-    estados = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI',
-               'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO']
     inicio = time.time()
-    nova_lista = ListaBem()
-    for i in estados:
-        lista_estado = Controle().abrir_csv_bens('./bem_candidato_2014/bem_candidato_2014_{}.csv'.format(i))
-        print(lista_estado.size)
-        arr = algumaCoisa(lista_estado)
-        arr = shellSortBens(arr)
-        print(len(arr))
-        lista_estado_nova = ListaBem()
-        for j in arr:
-            lista_estado_nova.inserirComeco(NoBem(j))
-        print(lista_estado.size)
-        nova_lista.concatenar(lista_estado)
-    # bens = Controle().abrir_csv_bens('./bem_candidato_2014/bem_candidato_2014_BRASIL.csv')
-    # arr = algumaCoisa(bens)
-    # arr = shellSortBens(arr)
-
-        # nova_lista.inserirComeco(NoBem(i))
+    bens = Controle().abrir_csv_bens('./bem_candidato_2014/bem_candidato_2014_BRASIL.csv')
+    arr = algumaCoisa(bens)
+    arr = shellSortBens(arr)
+    for i in bens:
+        nova_lista.inserirComeco(NoBem(i))
 
     print(time.time() - inicio, 'segundos')
 
@@ -325,9 +313,9 @@ def ListaFinal():
     return candidatos
 
 
-if __name__ == '__main__':
+'''if __name__ == '__main__':
     a = ListaBensFinal()
 
     print(a.size)
     bens_desordenados = Controle().abrir_csv_bens('./bem_candidato_2014/bem_candidato_2014_BRASIL.csv')
-    print(bens_desordenados.size)
+    print(bens_desordenados.size)'''
