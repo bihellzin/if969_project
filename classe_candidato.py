@@ -2,6 +2,10 @@ from classe_lista_bem import *
 
 
 class Candidato:
+    """
+    Classe com todos os atributos e métodos de um candidato, além
+    dos gettes e setters utilizando do @property do python
+    """
     def __init__(self):
         self._ano_eleicao = None
         self._sigla_uf = None
@@ -211,8 +215,8 @@ class Candidato:
     def lista_bens(self, lista):
         self._lista_bens = lista
 
-    def incluirBem(self, objeto_bem):
-        self.lista_bens.inserirComeco(NoBem(objeto_bem))
+    def listar_bens(self):
+        pass
 
     def __str__(self):
         saida = '{} -- {} -- {}\n{} ({}) {} ({})\nResumo dos bens:\n  - Total declarado: R${}\n  - Total por tipo de ' \
@@ -228,6 +232,10 @@ class Candidato:
 
         return saida
 
+    """
+    Abaixo estão alguns métodos de comparações
+    """
+
     def __eq__(self, outro_candidato):
         if self.nome == outro_candidato.nome:
             if self.cpf == outro_candidato.cpf:
@@ -238,8 +246,6 @@ class Candidato:
         else:
             return False
 
-    def listar_bens(self):
-        pass
 
     def __gt__(self, other):
         return self.id_candidato > other.id_candidato

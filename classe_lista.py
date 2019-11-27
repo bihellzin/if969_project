@@ -271,11 +271,11 @@ def candidatosOrdemAlfabeticaCrescente(lista):
             array[j] = temp
         gap //= 2
 
-    novaLista = ListaCandidato()
+    lista = ListaCandidato()
     for i in array:
-        novaLista.inserirComeco(NoCandidato(i))
+        lista.inserirComeco(NoCandidato(i))
 
-    return novaLista
+    return lista
 
 
 def candidatosOrdemAlfabeticaDecrescente(lista):
@@ -303,7 +303,7 @@ def candidatosOrdemAlfabeticaDecrescente(lista):
     return novaLista
 
 
-def candidatosTotalBensCrescente(lista):
+def candidatosTotalBensDecrescente(lista):
     array = []
     for i in lista:
         array.append(i)
@@ -328,7 +328,7 @@ def candidatosTotalBensCrescente(lista):
     return novaLista
 
 
-def candidatosTotalBensDecrescente(lista):
+def candidatosTotalBensCrescente(lista):
     array = []
     for i in lista:
         array.append(i)
@@ -353,7 +353,7 @@ def candidatosTotalBensDecrescente(lista):
     return novaLista
 
 
-def candidatosPartidoCrescente(lista):
+def candidatosPartidoDecrescente(lista):
     array = []
     for i in lista:
         array.append(i)
@@ -378,7 +378,7 @@ def candidatosPartidoCrescente(lista):
     return novaLista
 
 
-def candidatosPartidoDecrescente(lista):
+def candidatosPartidoCrescente(lista):
     array = []
     for i in lista:
         array.append(i)
