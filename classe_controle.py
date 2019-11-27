@@ -19,6 +19,7 @@ class Controle:
         with open(arquivo, 'rt', encoding='latin-1') as f:
             for linha in f:
                 palavras = linha.split(';')
+<<<<<<< HEAD
                 if '"DT_GERACAO"' in palavras:
                     continue
 
@@ -47,6 +48,60 @@ class Controle:
                 candidato.situacao_candidatura = palavras[53][1:-1]
 
                 lista_candidatos.inserirComeco(NoCandidato(candidato))
+=======
+                results.append(palavras)
+
+        for i in range(1, len(results)):
+            candidato = Candidato()
+            candidato.ano_eleicao = int(results[i][2][1:-1])
+            candidato.sigla_uf = results[i][10][1:-1]
+            candidato.codigo_cargo = int(results[i][13][1:-1])
+            candidato.descricao_cargo = results[i][14][1:-1]
+            candidato.nome = results[i][17][1:-1]
+            candidato.id_candidato = int(results[i][15][1:-1])
+            candidato.numero_urna = int(results[i][16][1:-1])
+            candidato.cpf = int(results[i][20][1:-1])
+            candidato.nome_urna = results[i][18][1:-1]
+            candidato.numero_partido = int(results[i][27][1:-1])
+            candidato.nome_partido = results[i][29][1:-1]
+            candidato.sigla_partido = results[i][28][1:-1]
+            candidato.codigo_ocupacao_candidato = int(results[i][49][1:-1])
+            candidato.descricao_ocupacao = results[i][50][1:-1]
+            candidato.data_nascimento = results[i][38][1:-1]
+            candidato.sexo_candidato = results[i][42][1:-1]
+            candidato.grau_instrucao = results[i][43][1:-1]
+            candidato.estado_civil = results[i][46][1:-1]
+            candidato.uf_nascimento = results[i][34][1:-1]
+            candidato.nome_municipio_nascimento = results[i][37][1:-1]
+            candidato.situacao_candidato_pos_pleito = results[i][53][1:-1]
+            candidato.situacao_candidatura = results[i][53][1:-1]
+
+            lista_candidatos.inserirComeco(NoCandidato(candidato))
+
+        return lista_candidatos
+
+    def abrir_csv_bens(self, arquivo):
+        colecaoBens = {}
+        with open(arquivo, 'rt', encoding='latin-1') as f:
+            for linha in f:
+                palavras = linha.split(';')
+                if '"DT_GERACAO"' not in palavras:
+                    bem = Bem()
+                    bem.codigo_bem = int(palavras[13][1:-1])
+                    bem.descricao_tipo_bem = palavras[14][1:-1]
+                    bem.descricao_detalhada_bem = palavras[15][1:-1]
+                    bem.valor_bem = float(palavras[16][1:-4]) + float(palavras[16][-3:-1])/100
+                    bem.id_candidato = int(palavras[11][1:-1])
+                    if bem.id_candidato not in colecaoBens:
+                        colecaoBens[bem.id_candidato] = ListaBem()
+                        colecaoBens[bem.id_candidato].inserirComeco(NoBem(bem))
+
+                    else:
+                        colecaoBens[bem.id_candidato].inserirComeco(NoBem(bem))
+
+
+        return colecaoBens
+>>>>>>> 5e80ec15b52f238a142f345b0380f8be9b3e8332
 
         self.lista = lista_candidatos
 
@@ -278,7 +333,16 @@ def ListaCandidatosFinal():
 
 def ListaBensFinal():
     inicio = time.time()
+<<<<<<< HEAD
     bens = Controle('./bem_candidato_2014/bem_candidato_2014_BRASIL.csv').abrir_csv_bens()
+=======
+    bens = Controle().abrir_csv_bens('./bem_candidato_2014/bem_candidato_2014_BRASIL.csv')
+    arr = algumaCoisa(bens)
+    arr = shellSortBens(arr)
+    for i in bens:
+        nova_lista.inserirComeco(NoBem(i))
+
+>>>>>>> 5e80ec15b52f238a142f345b0380f8be9b3e8332
     print(time.time() - inicio, 'segundos')
 
     return bens
@@ -298,6 +362,7 @@ def ListaFinal():
     return candidatos
 
 
+<<<<<<< HEAD
 if __name__ == '__main__':
     bens = ListaBensFinal()
     candidatos = ListaCandidatosFinal()
@@ -305,3 +370,11 @@ if __name__ == '__main__':
     for candidato in candidatos:
         print(candidato)
     print(time.time() - inicio, 'segundos')
+=======
+'''if __name__ == '__main__':
+    a = ListaBensFinal()
+
+    print(a.size)
+    bens_desordenados = Controle().abrir_csv_bens('./bem_candidato_2014/bem_candidato_2014_BRASIL.csv')
+    print(bens_desordenados.size)'''
+>>>>>>> 5e80ec15b52f238a142f345b0380f8be9b3e8332
