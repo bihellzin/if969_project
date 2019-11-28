@@ -216,7 +216,8 @@ class Candidato:
         self._lista_bens = lista
 
     def listar_bens(self):
-        pass
+        for bem in self.lista_bens:
+            print(bem)
 
     def __str__(self):
         saida = '{} -- {} -- {}\n{} ({}) {} ({})\nResumo dos bens:\n  - Total declarado: R${}\n  - Total por tipo de ' \

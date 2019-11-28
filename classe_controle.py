@@ -89,221 +89,124 @@ class Controle:
         return lista_final
 
 
-def retornaCandidatosDeterminadaCaracteristica(lista, caracteristica=None):
+def retornaCandidatosDeterminadaCaracteristica(lista, caracteristica):
     """
     Essa função retorna a lista de todos os candidatos que
     possuem alguma característica específica nos candidatos da lista
     """
-    lista_candidatos = ListaCandidato()
-    with open(arquivo, 'rt', encoding='latin-1') as f:
-        for linha in f:
-            palavras = linha.split(';')
-            if '"DT_GERACAO"' in palavras:
-                continue
-
-            elif caracteristica in palavras:
-                candidato = Candidato()
-                candidato.ano_eleicao = int(palavras[2][1:-1])
-                candidato.sigla_uf = palavras[10][1:-1]
-                candidato.codigo_cargo = int(palavras[13][1:-1])
-                candidato.descricao_cargo = palavras[14][1:-1]
-                candidato.nome = palavras[17][1:-1]
-                candidato.id_candidato = int(palavras[15][1:-1])
-                candidato.numero_urna = int(palavras[16][1:-1])
-                candidato.cpf = int(palavras[20][1:-1])
-                candidato.nome_urna = palavras[18][1:-1]
-                candidato.numero_partido = int(palavras[27][1:-1])
-                candidato.nome_partido = palavras[29][1:-1]
-                candidato.sigla_partido = palavras[28][1:-1]
-                candidato.codigo_ocupacao_candidato = int(palavras[49][1:-1])
-                candidato.descricao_ocupacao = palavras[50][1:-1]
-                candidato.data_nascimento = palavras[38][1:-1]
-                candidato.sexo_candidato = palavras[42][1:-1]
-                candidato.grau_instrucao = palavras[43][1:-1]
-                candidato.estado_civil = palavras[46][1:-1]
-                candidato.uf_nascimento = palavras[34][1:-1]
-                candidato.nome_municipio_nascimento = palavras[37][1:-1]
-                candidato.situacao_candidato_pos_pleito = palavras[53][1:-1]
-                candidato.situacao_candidatura = palavras[53][1:-1]
-
-                lista_candidatos.inserirComeco(NoCandidato(candidato))
-
-            else:
-                continue
-
-
-def retornaCandidatosComBensMaiorQueN(self, lista, valorDosBens):
     nova_lista = ListaCandidato()
 
-    for i in lista:
-        if i.lista_bens.total >= valorDosBens:
-            nova_lista.inserirComeco(NoCandidato(i))
+    for candidato in lista:
+        if caracteristica in candidato.__dict__.values():
+            nova_lista.inserirComeco(NoCandidato(candidato))
 
     return nova_lista
 
 
-def mostrarMediaPorCargo(self, cargo):
-    todosCandidatos = ListaFinal()
+def retornaCandidatosComBensMaiorQueN(lista, valorDosBens):
+    """
+    Essa função retorna uma lista com os candidatos que possuem o total de bens
+    superior a um determinado valor
+    """
+    nova_lista = ListaCandidato()
+
+    for candidato in lista:
+        if candidato.lista_bens.total >= valorDosBens:
+            nova_lista.inserirComeco(NoCandidato(candidato))
+
+    return nova_lista
+
+
+def mostrarMediaPorCargo(lista, cargo):
+    """
+    Essa função retorna um valor que corresponde a média do total de bens
+    dos candidatos que concorrem ao cargo especificado no argumento da função
+    """
     nova_lista = ListaCandidato()
     total = 0
 
-    for i in todosCandidatos:
-        if i.descricao_cargo == cargo:
-            total += i.lista_bens.total
+    for candidato in lista:
+        if candidato.descricao_cargo == cargo:
+            total += candidato.lista_bens.total
 
     return total / nova_lista.size
 
 
-def mostrarMediaPorUF(self, UF):
-    todosCandidatos = ListaFinal()
+def mostrarMediaPorUF(lista, UF):
+    """
+    Essa função retorna um valor que corresponde a média do total de bens
+    dos candidatos do estado especificado no argumento da função
+    """
     nova_lista = ListaCandidato()
     total = 0
 
-    for i in todosCandidatos:
-        if i.sigla_uf == UF:
-            nova_lista.inserirComeco(NoCandidato(i))
-            total += i.lista_bens.total
+    for candidato in lista:
+        if candidato.sigla_uf == UF:
+            nova_lista.inserirComeco(NoCandidato(candidato))
+            total += candidato.lista_bens.total
 
     return total / nova_lista.size
 
 
-def mostrarMediaPorPartido(self, partido):
-    todosCandidatos = ListaFinal()
+def mostrarMediaPorPartido(lista, partido):
+    """
+    Essa função retorna um valor que corresponde a média do total de bens
+    dos candidatos do partido especificado no argumento da função
+    """
     nova_lista = ListaCandidato()
     total = 0
 
-    for i in todosCandidatos:
-        if i.sigla_partido == partido:
-            nova_lista.inserirComeco(NoCandidato(i))
-            total += i.lista_bens.total
+    for candidato in lista:
+        if candidato.sigla_partido == partido:
+            nova_lista.inserirComeco(NoCandidato(candidato))
+            total += candidato.lista_bens.total
 
     return total / nova_lista.size
 
 
-def mostrarMediaPorOcupacao(self, ocupacao):
-    todosCandidatos = ListaFinal()
+def mostrarMediaPorOcupacao(lista, ocupacao):
+    """
+    Essa função retorna um valor que corresponde a média do total de bens
+    dos candidatos que possuem a ocupação especificado no argumento da função
+    """
     nova_lista = ListaCandidato()
     total = 0
 
-    for i in todosCandidatos:
-        if i.descricao_ocupacao == ocupacao:
-            nova_lista.inserirComeco(NoCandidato(i))
-            total += i.lista_bens.total
+    for candidato in lista:
+        if candidato.descricao_ocupacao == ocupacao:
+            nova_lista.inserirComeco(NoCandidato(candidato))
+            total += candidato.lista_bens.total
 
     return total / nova_lista.size
 
 
-def mostrarMediaPorAnoNascimento(self, ano_nascimento):
-    todosCandidatos = ListaFinal()
+def mostrarMediaPorAnoNascimento(lista, ano_nascimento):
     nova_lista = ListaCandidato()
     total = 0
 
-    for i in todosCandidatos:
-        if int(i.data_nascimento[-4]) == ano_nascimento or i.data_nascimento[-4] == ano_nascimento:
-            nova_lista.inserirComeco(NoCandidato(i))
-            total += i.lista_bens.total
+    for candidato in lista:
+        if int(candidato.data_nascimento[-4]) == ano_nascimento or candidato.data_nascimento[-4] == ano_nascimento:
+            nova_lista.inserirComeco(NoCandidato(candidato))
+            total += candidato.lista_bens.total
 
     return total / nova_lista.size
 
 
-def removerCandidatoComCaracteristica(self, caracteristica):
-    lista_candidatos = ListaCandidato()
-    with open('./consulta_cand_2014/consulta_cand_2014_BRASIL.csv', 'rt', encoding='latin-1') as f:
-        results = []
-        for linha in f:
-            palavras = linha.split(';')
-            results.append(palavras)
+def removerCandidatoComCaracteristica(lista, caracteristica):
+    """
+    Essa função retorna a lista de todos os candidatos que
+    possuem alguma característica específica nos candidatos da lista
+    """
+    nova_lista = ListaCandidato()
 
-    for i in range(1, len(results)):
-        if caracteristica in results[i]:
-            continue
-        candidato = Candidato()
-        candidato.ano_eleicao = int(results[i][2][1:-1])
-        candidato.sigla_uf = results[i][10][1:-1]
-        candidato.codigo_cargo = int(results[i][13][1:-1])
-        candidato.descricao_cargo = results[i][14][1:-1]
-        candidato.nome = results[i][17][1:-1]
-        candidato.id_candidato = int(results[i][15][1:-1])
-        candidato.numero_urna = int(results[i][16][1:-1])
-        candidato.cpf = int(results[i][20][1:-1])
-        candidato.nome_urna = results[i][18][1:-1]
-        candidato.numero_partido = int(results[i][27][1:-1])
-        candidato.nome_partido = results[i][29][1:-1]
-        candidato.sigla_partido = results[i][28][1:-1]
-        candidato.codigo_ocupacao_candidato = int(results[i][49][1:-1])
-        candidato.descricao_ocupacao = results[i][50][1:-1]
-        candidato.data_nascimento = results[i][38][1:-1]
-        candidato.sexo_candidato = results[i][42][1:-1]
-        candidato.grau_instrucao = results[i][43][1:-1]
-        candidato.estado_civil = results[i][46][1:-1]
-        candidato.uf_nascimento = results[i][34][1:-1]
-        candidato.nome_municipio_nascimento = results[i][37][1:-1]
-        candidato.situacao_candidato_pos_pleito = results[i][53][1:-1]
-        candidato.situacao_candidatura = results[i][53][1:-1]
+    for candidato in lista:
+        if caracteristica not in candidato.__dict__.values():
+            nova_lista.inserirComeco(NoCandidato(candidato))
 
-        lista_candidatos.inserirComeco(NoCandidato(candidato))
-
-    return lista_candidatos
-
-
-def shellSort(array):
-    n = len(array)
-    gap = n // 2
-    while gap > 0:
-
-        for i in range(gap, n):
-            temp = array[i]
-            j = i
-            while j >= gap and array[j - gap] < temp:
-                array[j] = array[j - gap]
-                j -= gap
-            array[j] = temp
-        gap //= 2
-
-    return array
-
-
-def algumaCoisa(lista):
-    arr = []
-    for i in lista:
-        arr.append(i)
-
-    return arr
-
-
-def ListaCandidatosFinal():
-    inicio = time.time()
-    candidatos = Controle('./consulta_cand_2014/consulta_cand_2014_BRASIL.csv').abrir_csv_candidatos()
-    print(time.time() - inicio, 'segundos')
-    return candidatos
-
-
-def ListaBensFinal():
-    inicio = time.time()
-    bens = Controle('./bem_candidato_2014/bem_candidato_2014_BRASIL.csv').abrir_csv_bens()
-    print(time.time() - inicio, 'segundos')
-
-    return bens
-
-
-def ListaFinal():
-    inicio = time.time()
-    bens = ListaBensFinal()
-    candidatos = ListaCandidatosFinal()
-
-    for candidato in candidatos:
-        if candidato.id_candidato in bens:
-            candidato.lista_bens = bens[candidato.id_candidato]
-
-    print(time.time() - inicio, 'segundos')
-
-    return candidatos
+    return nova_lista
 
 
 if __name__ == '__main__':
-    bens = ListaBensFinal()
-    candidatos = ListaCandidatosFinal()
     inicio = time.time()
-    for candidato in candidatos:
-        print(candidato)
+    candidatos = Controle().abrir_csv_bens()
     print(time.time() - inicio, 'segundos')
