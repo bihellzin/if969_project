@@ -79,17 +79,20 @@ class ListaCandidato:
 
     def __iter__(self):
         class Ponteiro:
-            def __init__(self, lista, passo=0):
-                self.passo = passo
-                self.lista = lista
-
+            def __init__(self, lista):
+                self.valor = lista.root
+                
+            def __iter__(self):
+                self.valor = self.valor.candidato
+                return self
+                
             def __next__(self):
-                if self.passo >= self.lista.size:
+                if self.valor is None:
                     raise StopIteration
-                value = self.lista[self.passo]
-                self.passo += 1
+                valor = self.valor.candidato
+                self.valor = self.valor.prox
 
-                return value
+                return valor
 
         return Ponteiro(self)
 
