@@ -94,6 +94,7 @@ def retornaCandidatosDeterminadaCaracteristica(lista, caracteristica):
     Essa função retorna a lista de todos os candidatos que
     possuem alguma característica específica nos candidatos da lista
     """
+    caracteristica = caracteristica.upper()
     nova_lista = ListaCandidato()
 
     for candidato in lista:
@@ -122,30 +123,33 @@ def mostrarMediaPorCargo(lista, cargo):
     Essa função retorna um valor que corresponde a média do total de bens
     dos candidatos que concorrem ao cargo especificado no argumento da função
     """
-    nova_lista = ListaCandidato()
+    cargo = cargo.upper()
+    cont = 0
     total = 0
 
     for candidato in lista:
         if candidato.descricao_cargo == cargo:
             total += candidato.lista_bens.total
+            cont += 1
 
-    return total / nova_lista.size
+    return total / cont
 
 
-def mostrarMediaPorUF(lista, UF):
+def mostrarMediaPorUF(lista, sigla_UF):
     """
     Essa função retorna um valor que corresponde a média do total de bens
     dos candidatos do estado especificado no argumento da função
     """
-    nova_lista = ListaCandidato()
+    sigla_UF = sigla_UF.upper()
+    cont = 0
     total = 0
 
     for candidato in lista:
-        if candidato.sigla_uf == UF:
-            nova_lista.inserirComeco(NoCandidato(candidato))
+        if candidato.sigla_uf == sigla_UF:
             total += candidato.lista_bens.total
+            cont += 1
 
-    return total / nova_lista.size
+    return total / cont
 
 
 def mostrarMediaPorPartido(lista, partido):
@@ -153,15 +157,16 @@ def mostrarMediaPorPartido(lista, partido):
     Essa função retorna um valor que corresponde a média do total de bens
     dos candidatos do partido especificado no argumento da função
     """
-    nova_lista = ListaCandidato()
+    partido = partido.upper()
+    cont = 0
     total = 0
 
     for candidato in lista:
-        if candidato.sigla_partido == partido:
-            nova_lista.inserirComeco(NoCandidato(candidato))
+        if candidato.sigla_partido == partido or candidato.nome_partido == partido:
             total += candidato.lista_bens.total
+            cont += 1
 
-    return total / nova_lista.size
+    return total / cont
 
 
 def mostrarMediaPorOcupacao(lista, ocupacao):
@@ -169,27 +174,28 @@ def mostrarMediaPorOcupacao(lista, ocupacao):
     Essa função retorna um valor que corresponde a média do total de bens
     dos candidatos que possuem a ocupação especificado no argumento da função
     """
-    nova_lista = ListaCandidato()
+    ocupacao = ocupacao.upper()
+    cont = 0
     total = 0
 
     for candidato in lista:
         if candidato.descricao_ocupacao == ocupacao:
-            nova_lista.inserirComeco(NoCandidato(candidato))
+            cont += 1
             total += candidato.lista_bens.total
 
-    return total / nova_lista.size
+    return total / cont
 
 
 def mostrarMediaPorAnoNascimento(lista, ano_nascimento):
-    nova_lista = ListaCandidato()
     total = 0
+    cont = 0
 
     for candidato in lista:
-        if int(candidato.data_nascimento[-4]) == ano_nascimento or candidato.data_nascimento[-4] == ano_nascimento:
-            nova_lista.inserirComeco(NoCandidato(candidato))
+        if int(candidato.data_nascimento[-4:]) == ano_nascimento or candidato.data_nascimento[-4:] == ano_nascimento:
             total += candidato.lista_bens.total
+            cont += 1
 
-    return total / nova_lista.size
+    return total / cont
 
 
 def removerCandidatoComCaracteristica(lista, caracteristica):
@@ -197,6 +203,7 @@ def removerCandidatoComCaracteristica(lista, caracteristica):
     Essa função retorna a lista de todos os candidatos que
     possuem alguma característica específica nos candidatos da lista
     """
+    caracteristica = caracteristica.upper()
     nova_lista = ListaCandidato()
 
     for candidato in lista:
@@ -207,6 +214,6 @@ def removerCandidatoComCaracteristica(lista, caracteristica):
 
 
 if __name__ == '__main__':
-    inicio = time.time()
     candidatos = Controle().abrir_csv_bens()
-    print(time.time() - inicio, 'segundos')
+    nova = removerCandidatoComCaracteristica(candidatos, 'ensino superior')
+    print(nova.size)

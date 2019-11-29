@@ -222,14 +222,14 @@ class Candidato:
     def __str__(self):
         saida = '{} -- {} -- {}\n{} ({}) {} ({})\nResumo dos bens:\n  - Total declarado: R${}\n  - Total por tipo de ' \
                 'bem '.format(self.nome_urna, self.numero_urna, self.sigla_partido, self.descricao_cargo, self.sigla_uf,
-                              self.nome_municipio_nascimento, self.uf_nascimento, self.lista_bens)
+                              self.nome_municipio_nascimento, self.uf_nascimento, self.lista_bens.total)
 
         return saida
 
     def __repr__(self):
         saida = '{} -- {} -- {}\n{} ({}) {} ({})\nResumo dos bens:\n  - Total declarado: R${}\n  - Total por tipo de ' \
                 'bem '.format(self.nome_urna, self.numero_urna, self.sigla_partido, self.descricao_cargo, self.sigla_uf,
-                              self.nome_municipio_nascimento, self.uf_nascimento, self.lista_bens)
+                              self.nome_municipio_nascimento, self.uf_nascimento, self.lista_bens.total)
 
         return saida
 
@@ -246,10 +246,3 @@ class Candidato:
                 return False
         else:
             return False
-
-
-    def __gt__(self, other):
-        return self.id_candidato > other.id_candidato
-
-    def __lt__(self, other):
-        return self.id_candidato < other.id_candidato

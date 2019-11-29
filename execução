@@ -1,0 +1,7 @@
+0.9278851672581263 segundos, o tempo para abrir os candidatos com os bens
+0.16815895353044782 segundos, o tempo para filtrar os candidatos com os bens superiores a x reais
+0.020032530920846122 segundos, o tempo para filtrar os candidatos nascidos em determinado ano
+0.012943383625575474 segundos, o tempo para filtrar os candidatos de determinada ocupação
+0.012257180895124163 segundos, o tempo para filtrar os candidatos de determinada estado
+0.011398724147251673 segundos, o tempo para filtrar os candidatos de determinada partido
+0.013825293949672154 segundos, o tempo para filtrar os candidatos concorrendo a determinada cargo

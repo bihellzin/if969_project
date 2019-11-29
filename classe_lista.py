@@ -356,7 +356,7 @@ def candidatosTotalBensCrescente(lista):
     return novaLista
 
 
-def candidatosPartidoDecrescente(lista):
+def candidatosPartidoCrescente(lista):
     array = []
     for i in lista:
         array.append(i)
@@ -368,7 +368,7 @@ def candidatosPartidoDecrescente(lista):
             temp = array[i]
             j = i
 
-            while j >= gap and array[j - gap].nome_partido < temp.nome_partido:
+            while j >= gap and array[j - gap].nome_partido > temp.nome_partido:
                 array[j] = array[j - gap]
                 j -= gap
             array[j] = temp
@@ -381,7 +381,7 @@ def candidatosPartidoDecrescente(lista):
     return novaLista
 
 
-def candidatosPartidoCrescente(lista):
+def candidatosPartidoDecrescente(lista):
     array = []
     for i in lista:
         array.append(i)

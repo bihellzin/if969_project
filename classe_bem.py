@@ -48,14 +48,42 @@ class Bem:
         self._id_candidato = value
 
     def __str__(self):
-        saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
-                                                          self.descricao_detalhada_bem)
+        if len(self.descricao_detalhada_bem) <= 80:
+            saida = '{} -- {} -- R$ {} Descrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
+                                                              self.descricao_detalhada_bem)
+
+        else:
+            descricao_final = ''
+            contagem_letras = 0
+            for i in self.descricao_detalhada_bem:
+                if contagem_letras == 80:
+                    descricao_final += '\n'
+                    contagem_letras = 0
+
+                descricao_final += i
+                contagem_letras += 1
+            saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
+                                                              descricao_final)
 
         return saida
 
     def __repr__(self):
-        saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
-                                                          self.descricao_detalhada_bem)
+        if len(self.descricao_detalhada_bem) <= 80:
+            saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
+                                                              self.descricao_detalhada_bem)
+
+        else:
+            descricao_final = ''
+            contagem_letras = 0
+            for i in self.descricao_detalhada_bem:
+                if contagem_letras == 80:
+                    descricao_final += '\n'
+                    contagem_letras = 0
+
+                descricao_final += i
+                contagem_letras += 1
+            saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
+                                                              descricao_final)
 
         return saida
 
