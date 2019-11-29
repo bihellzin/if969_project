@@ -43,7 +43,7 @@ class Controle:
                 candidato.uf_nascimento = palavras[34][1:-1]
                 candidato.nome_municipio_nascimento = palavras[37][1:-1]
                 candidato.situacao_candidato_pos_pleito = palavras[53][1:-1]
-                candidato.situacao_candidatura = palavras[53][1:-1]
+                candidato.situacao_candidatura = palavras[25][1:-1]
 
                 lista_candidatos.inserirComeco(NoCandidato(candidato))
 
