@@ -221,17 +221,40 @@ class Candidato:
 
     def __str__(self):
         saida = '{} -- {} -- {}\n{} ({}) {} ({})\nResumo dos bens:\n  - Total declarado: R${}\n  - Total por tipo de ' \
-                'bem '.format(self.nome_urna, self.numero_urna, self.sigla_partido, self.descricao_cargo, self.sigla_uf,
+                'bem\n'.format(self.nome_urna, self.numero_urna, self.sigla_partido, self.descricao_cargo, self.sigla_uf,
                               self.nome_municipio_nascimento, self.uf_nascimento, self.lista_bens.total)
+
+        tipos = self.total_por_tipo_bem()
+
+        for i in tipos:
+            saida += '{}: R${}\n'.format(i, tipos[i].total)
 
         return saida
 
     def __repr__(self):
         saida = '{} -- {} -- {}\n{} ({}) {} ({})\nResumo dos bens:\n  - Total declarado: R${}\n  - Total por tipo de ' \
-                'bem '.format(self.nome_urna, self.numero_urna, self.sigla_partido, self.descricao_cargo, self.sigla_uf,
+                'bem\n'.format(self.nome_urna, self.numero_urna, self.sigla_partido, self.descricao_cargo, self.sigla_uf,
                               self.nome_municipio_nascimento, self.uf_nascimento, self.lista_bens.total)
 
+        tipos = self.total_por_tipo_bem()
+
+        for i in tipos:
+            saida += '{}: R${}\n'.format(i, tipos[i].total)
+
         return saida
+
+    def total_por_tipo_bem(self):
+        tipos = {}
+
+        for bem in self.lista_bens:
+            if bem.descricao_tipo_bem not in tipos:
+                tipos[bem.descricao_tipo_bem] = ListaBem()
+                tipos[bem.descricao_tipo_bem].inserirComeco(NoBem(bem))
+
+            else:
+                tipos[bem.descricao_tipo_bem].inserirComeco(NoBem(bem))
+
+        return tipos
 
     """
     Abaixo estão alguns métodos de comparações

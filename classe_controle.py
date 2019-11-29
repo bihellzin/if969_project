@@ -1,4 +1,3 @@
-import time
 from classe_lista import *
 from classe_candidato import *
 from classe_lista_bem import *
@@ -215,5 +214,4 @@ def removerCandidatoComCaracteristica(lista, caracteristica):
 
 if __name__ == '__main__':
     candidatos = Controle().abrir_csv_bens()
-    nova = removerCandidatoComCaracteristica(candidatos, 'ensino superior')
-    print(nova.size)
+    print(candidatos)

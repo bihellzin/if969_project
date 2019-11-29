@@ -62,14 +62,14 @@ class Bem:
 
                 descricao_final += i
                 contagem_letras += 1
-            saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
+            saida = '{} -- {} -- R$ {} Descrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
                                                               descricao_final)
 
         return saida
 
     def __repr__(self):
         if len(self.descricao_detalhada_bem) <= 80:
-            saida = '{} -- {} -- R$ {}\nDescrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
+            saida = '{} -- {} -- R$ {} Descrição: {}'.format(self.codigo_bem, self.descricao_tipo_bem, self.valor_bem,
                                                               self.descricao_detalhada_bem)
 
         else:
