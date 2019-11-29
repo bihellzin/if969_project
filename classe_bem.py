@@ -1,5 +1,7 @@
 class Bem:
-
+    """
+    Classe do objeto Bem com alguns atributos
+    """
     def __init__(self):
         self._codigo_bem = None
         self._descricao_tipo_bem = None

@@ -227,7 +227,7 @@ class Candidato:
         tipos = self.total_por_tipo_bem()
 
         for i in tipos:
-            saida += '{}: R${}\n'.format(i, tipos[i].total)
+            saida += '    - {}: R${}\n'.format(i, tipos[i].total)
 
         return saida
 
@@ -239,7 +239,7 @@ class Candidato:
         tipos = self.total_por_tipo_bem()
 
         for i in tipos:
-            saida += '{}: R${}\n'.format(i, tipos[i].total)
+            saida += '    - {}: R${}\n'.format(i, tipos[i].total)
 
         return saida
 

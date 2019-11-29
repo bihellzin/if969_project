@@ -100,6 +100,8 @@ def retornaCandidatosDeterminadaCaracteristica(lista, caracteristica):
         if caracteristica in candidato.__dict__.values():
             nova_lista.inserirComeco(NoCandidato(candidato))
 
+    exibirLista(nova_lista)
+
     return nova_lista
 
 
@@ -113,6 +115,8 @@ def retornaCandidatosComBensMaiorQueN(lista, valorDosBens):
     for candidato in lista:
         if candidato.lista_bens.total >= valorDosBens:
             nova_lista.inserirComeco(NoCandidato(candidato))
+
+    exibirLista(nova_lista)
 
     return nova_lista
 
@@ -131,6 +135,8 @@ def mostrarMediaPorCargo(lista, cargo):
             total += candidato.lista_bens.total
             cont += 1
 
+    print(total / cont)
+
     return total / cont
 
 
@@ -140,6 +146,10 @@ def mostrarMediaPorUF(lista, sigla_UF):
     dos candidatos do estado especificado no argumento da função
     """
     sigla_UF = sigla_UF.upper()
+    while sigla_UF not in ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB',
+                           'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO']:
+        sigla_UF = input('Sigla de UF inválido\nDigite novamente\n').upper()
+
     cont = 0
     total = 0
 
@@ -165,6 +175,8 @@ def mostrarMediaPorPartido(lista, partido):
             total += candidato.lista_bens.total
             cont += 1
 
+    print(total / cont)
+
     return total / cont
 
 
@@ -182,10 +194,16 @@ def mostrarMediaPorOcupacao(lista, ocupacao):
             cont += 1
             total += candidato.lista_bens.total
 
+    print(total / cont)
+
     return total / cont
 
 
 def mostrarMediaPorAnoNascimento(lista, ano_nascimento):
+    """
+    Essa função retorna um valor que corresponde a média do total de bens
+    dos candidatos que nasceram no mesmo ano
+    """
     total = 0
     cont = 0
 
@@ -193,6 +211,8 @@ def mostrarMediaPorAnoNascimento(lista, ano_nascimento):
         if int(candidato.data_nascimento[-4:]) == ano_nascimento or candidato.data_nascimento[-4:] == ano_nascimento:
             total += candidato.lista_bens.total
             cont += 1
+
+    print(total / cont)
 
     return total / cont
 
@@ -209,9 +229,18 @@ def removerCandidatoComCaracteristica(lista, caracteristica):
         if caracteristica not in candidato.__dict__.values():
             nova_lista.inserirComeco(NoCandidato(candidato))
 
+    exibirLista(nova_lista)
+
     return nova_lista
 
 
-if __name__ == '__main__':
-    candidatos = Controle().abrir_csv_bens()
-    print(candidatos)
+def exibirLista(lista):
+    opcao = input('Gostaria de visualizar a lista com as modificações ?\nDigite "sim" ou "não"\n')
+    while opcao.upper()[0] not in ('N', 'S', 'Y'):
+        opcao = input('Gostaria de visualizar a lista com as modificações ?\nDigite "sim" ou "não"\n')
+
+    if opcao.upper()[0] == 'N':
+        return
+    elif opcao.upper()[0] == 'Y' or opcao.upper()[0] == 'S':
+        for candidato in lista:
+            print('{}\n'.format(candidato))
